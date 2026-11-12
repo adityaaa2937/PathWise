@@ -1,0 +1,247 @@
+.campus-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #0F2030 0%, #08121B 100%);
+  user-select: none;
+  touch-action: none;
+}
+
+.campus-map-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease-out;
+  will-change: transform;
+}
+
+.campus-master-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
+}
+
+/* ── 3D Isometric Buildings ── */
+.isometric-bldg-group {
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.isometric-bldg-group:hover {
+  transform: translateY(-4px);
+}
+
+.isometric-bldg-group:hover rect {
+  stroke: #A8E6CF !important;
+  stroke-width: 2px !important;
+}
+
+.bldg-selected rect {
+  stroke: #00E676 !important;
+  stroke-width: 3px !important;
+}
+
+.bldg-label-tag {
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.isometric-bldg-group:hover .bldg-label-tag {
+  transform: translateY(-8px) scale(1.08);
+}
+
+/* ── Route Dash Animation ── */
+@keyframes routeDashFlow {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.route-animated-dash {
+  animation: routeDashFlow 1.6s linear infinite;
+}
+
+/* ── Beacon and Pin Animations ── */
+@keyframes beaconWave {
+  0% {
+    r: 10;
+    opacity: 0.8;
+  }
+  100% {
+    r: 36;
+    opacity: 0;
+  }
+}
+
+.beacon-pulse {
+  animation: beaconWave 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.pin-pulse-ring {
+  animation: beaconWave 1.8s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes radarRotate {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+}
+
+.current-nav-beacon .radar-wave-1 {
+  animation: beaconWave 1.5s ease-out infinite;
+}
+
+.current-nav-beacon .radar-wave-2 {
+  animation: radarRotate 2s ease-in-out infinite;
+}
+
+.svg-facility-pin {
+  transition: transform 0.18s ease-out;
+}
+
+.svg-facility-pin:hover {
+  transform: scale(1.22);
+}
+
+.pin-selected {
+  transform: scale(1.28);
+}
+
+/* ── Campus Map Watermark badge ── */
+.map-campus-watermark {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.watermark-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00E676;
+  box-shadow: 0 0 8px #00E676;
+}
+
+/* ── Map Legend ── */
+.map-legend {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 25;
+}
+
+.map-legend-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+}
+
+.map-legend-toggle:hover {
+  background: var(--color-surface-hover);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.legend-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2E7D57;
+  box-shadow: 0 0 6px #4CAF50;
+}
+
+.map-legend-body {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: rgba(12, 22, 32, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  min-width: 190px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.legend-badge-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ── Responsive Mobile adjustments ── */
+@media (max-width: 768px) {
+  .map-campus-watermark {
+    display: none;
+  }
+
+  .map-legend {
+    bottom: 80px;
+    right: 12px;
+  }
+}

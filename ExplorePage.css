@@ -1,0 +1,113 @@
+.explore-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.explore-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  flex-shrink: 0;
+  padding: 0 20px;
+  border-radius: 0;
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 50;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.explore-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 1.4rem;
+}
+
+.logo-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00E676, #81C784);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+}
+
+.logo-tagline {
+  font-size: 0.65rem;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.03em;
+}
+
+.explore-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-campus-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #A8E6CF;
+  background: rgba(46, 125, 87, 0.2);
+  border: 1px solid rgba(46, 125, 87, 0.4);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.explore-map-area {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Floating report button (FAB) */
+.report-fab {
+  position: absolute;
+  right: 18px;
+  bottom: 74px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F44336, #D32F2F);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(244, 67, 54, 0.45);
+  z-index: 30;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s;
+}
+
+.report-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(244, 67, 54, 0.65);
+}
+
+@media (max-width: 640px) {
+  .explore-header {
+    padding: 0 14px;
+  }
+  
+  .report-fab {
+    bottom: 80px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+}
